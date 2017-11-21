@@ -19,9 +19,10 @@ if films
   movies = films.map do |film|
     result = RestClient.get(film)
     movie_hash = JSON.parse(result)
-    movie_hash.select{|k,v| k =='title'}
+    movie_hash
   end
-  movies
+  puts character + " appears in: "
+  return movies
 else
   puts "Sorry no information found for #{character}"
 end
@@ -40,6 +41,11 @@ end
 
 def parse_character_movies(films_hash)
   # some iteration magic and puts out the movies in a nice list
+  films_hash.each do |film|
+    puts "Movie: " + film['title']
+    puts "Episode: " + film['episode_id'].to_s
+    puts "Release Date: " + film['release_date']
+  end
 end
 
 def show_character_movies(character)
