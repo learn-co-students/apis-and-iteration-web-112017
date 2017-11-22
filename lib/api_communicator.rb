@@ -16,10 +16,20 @@ def get_character_movies_from_api(character)
   # this collection will be the argument given to `parse_character_movies`
   #  and that method will do some nice presentation stuff: puts out a list
   #  of movies by title. play around with puts out other info about a given film.
+  character_hash["results"].each do |char|
+    if char["name"].downcase == character
+      return char["films"].collect do |film_url|
+        string_of_hashes = RestClient.get(film_url)
+        JSON.parse(string_of_hashes)
+      end
+     end
+   end
 end
 
 def parse_character_movies(films_hash)
   # some iteration magic and puts out the movies in a nice list
+  films_hash.each_with_index do |film, index|
+  puts "#{index+1}. #{film["title"]}"
 end
 
 def show_character_movies(character)
