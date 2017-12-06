@@ -7,7 +7,7 @@ require 'pry'
 # Methods for finding character info
 
 def get_character_hash
-  all_characters = RestClient.get('https://itunes.apple.com/us/podcast/npr-politics-podcast/id1057255460?mt=2&ign-mpt=uo%3D4')
+  all_characters = RestClient.get('https://itunes.apple.com/search?term=podcast&media=podcast&limit=200')
   # hash = JSON.parse(all_characters)
   binding.pry
   result = {}
