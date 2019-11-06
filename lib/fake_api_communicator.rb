@@ -1,18 +1,23 @@
 require 'rest-client'
+require 'open-uri'
+require 'nokogiri'
 require 'json'
 require 'pry'
 
 # Methods for finding character info
 
 def get_character_hash
-  all_characters = RestClient.get('http://www.swapi.co/api/people/')
-  hash = JSON.parse(all_characters)
+  all_characters = RestClient.get('https://itunes.apple.com/search?term=podcast&media=podcast&limit=200')
+  # hash = JSON.parse(all_characters)
+  binding.pry
   result = {}
     hash["results"].each do |character|
       result[character["name"]] = character
     end
   result
 end
+
+get_character_hash
 
 def movie_list(url_list)
   # collect those film API urls, make a web request to each URL to get the info
